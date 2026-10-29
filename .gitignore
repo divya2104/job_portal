@@ -1,0 +1,11 @@
+node_modules
+.next
+.env*.local
+.env.local
+*.tsbuildinfo
+next-env.d.ts
+supabase/.temp
+supabase/.branches
+.claude/settings.local.json
+.env.cloud
+BACKEND_BLUEPRINT.md

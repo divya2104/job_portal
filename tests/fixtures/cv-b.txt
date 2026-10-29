@@ -1,0 +1,13 @@
+Rohan Mehta (fictional test CV)
+rohan.mehta@example.com | +91 90000 11111
+SUMMARY
+Data analyst with 2.5 years of experience in consumer fintech: SQL, Python, dashboards and experiment analysis.
+EXPERIENCE
+Data Analyst, Example Payments Pvt Ltd, Bengaluru, Apr 2024 - Present
+Built Looker dashboards for merchant payments; automated weekly KPI reporting in Python and dbt.
+Analysed A/B tests on checkout flows; partnered with product managers on funnel metrics.
+Business Analyst Intern, Example Bank, Mumbai, Jun 2023 - Mar 2024
+SKILLS
+SQL, Python (pandas), dbt, Looker, Tableau, Excel, A/B test analysis, statistics, stakeholder communication
+EDUCATION
+B.Sc Statistics, Example University, 2023

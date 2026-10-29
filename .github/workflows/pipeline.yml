@@ -1,0 +1,45 @@
+# Runs the job pipeline in the cloud (PLAN.md §10). No laptop involved.
+#  - schedule: every day 10:00 IST (04:30 UTC), all onboarded users
+#  - workflow_dispatch: a run queued from the dashboard (run_id), or a manual full batch (blank run_id)
+name: pipeline
+
+on:
+  schedule:
+    - cron: "30 4 * * *"
+  workflow_dispatch:
+    inputs:
+      run_id:
+        description: "Queued run id from the dashboard (blank = full batch for all users)"
+        required: false
+
+concurrency:
+  group: pipeline-${{ inputs.run_id || 'batch' }}
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 110 # under the 2 h stale-run reaper
+    env:
+      NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+      SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      FIRECRAWL_API_KEY: ${{ secrets.FIRECRAWL_API_KEY }}
+      EXTRACTION_MODEL: claude-haiku-5-5
+      SCORING_MODEL: claude-opus-5-5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Run pipeline
+        env:
+          RUN_ID: ${{ inputs.run_id }} # via env, never interpolated into the script
+        run: |
+          if [ -n "$RUN_ID" ]; then
+            npm run pipeline -- --run "$RUN_ID"
+          else
+            npm run pipeline -- --all
+          fi

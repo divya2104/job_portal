@@ -1,0 +1,32 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 5 0 R >> >> /Contents 4 0 R >>
+endobj
+4 0 obj
+<< /Length 888 >>
+stream
+BT /F1 10 Tf 50 800 Td 14 TL (Asha Rao \(fictional test CV\)) Tj T* (asha.rao@example.com | +91 90000 00000 | linkedin.com/in/asha-rao-example) Tj T* (SUMMARY) Tj T* (Product manager with 3 years of experience in fintech lending and LLM-powered products.) Tj T* (EXPERIENCE) Tj T* (Associate Product Manager, Example Lending Co, Bengaluru, Jan 2023 - Present) Tj T* (Shipped a retrieval-augmented support assistant used by 40,000 borrowers; owned roadmap and PRDs.) Tj T* (Ran A/B tests on loan onboarding, improving completion by 12 percent using SQL and Amplitude.) Tj T* (Business Analyst, Example Bank, Mumbai, Jul 2022 - Dec 2022) Tj T* (SKILLS) Tj T* (Product roadmapping, PRDs, SQL, A/B testing, LLM product design, stakeholder management, Jira) Tj T* (EDUCATION) Tj T* (MBA, Example Institute of Management, 2022) Tj T* (B.Tech Computer Science, Example University, 2020) Tj T* ET
+endstream
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000241 00000 n 
+0000001180 00000 n 
+trailer
+<< /Size 6 /Root 1 0 R >>
+startxref
+1250
+%%EOF
