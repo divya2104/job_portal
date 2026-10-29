@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { htmlToText, urlKey } from "@/lib/text";
+import { htmlToText, LOGIN_WALLED, urlKey } from "@/lib/text";
 import { detectSource } from "@/worker/providers";
 import { questionKey } from "@/lib/questions";
 
@@ -17,6 +17,13 @@ describe("urlKey (dedup identity)", () => {
   it("keeps identity params and SPA routes, drops plain fragments", () => {
     expect(urlKey("https://x.com/careers?id=7#/job/42")).toBe("x.com/careers?id=7#/job/42");
     expect(urlKey("https://x.com/careers/7#apply")).toBe("x.com/careers/7");
+  });
+});
+
+describe("login-walled sites", () => {
+  it("are recognised by host, including subdomains", () => {
+    for (const h of ["www.linkedin.com", "in.linkedin.com", "www.naukri.com", "iimjobs.com", "www.instahyre.com"]) expect(LOGIN_WALLED.test(h)).toBe(true);
+    for (const h of ["jobs.lever.co", "notlinkedin.com.evil.io", "careers.example.com"]) expect(LOGIN_WALLED.test(h)).toBe(false);
   });
 });
 

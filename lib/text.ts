@@ -33,3 +33,8 @@ export function htmlToText(html: string | null | undefined): string {
 }
 
 export const normTitle = (t: string) => t.toLowerCase().replace(/[^a-z0-9+#]+/g, " ").trim();
+
+/** Sites that need a login to see jobs (BACKEND_BLUEPRINT.md §3). We never scrape around access controls. */
+export const LOGIN_WALLED = /(^|\.)(linkedin\.com|naukri\.com|iimjobs\.com|instahyre\.com)$/i;
+export const LOGIN_WALLED_MSG =
+  "That site needs a login, so the tool can't read it (it never works around logins). Open the job there, click Apply to reach the company's own careers page, and paste that link instead.";

@@ -7,6 +7,7 @@ import { quotaFor } from "@/lib/quota";
 import { dispatchRun } from "@/lib/dispatch";
 import { missingAnswers, questionKey } from "@/lib/questions";
 import { detectSource } from "@/worker/providers";
+import { LOGIN_WALLED, LOGIN_WALLED_MSG } from "@/lib/text";
 
 const back = (tab: string, msg: { ok?: string; error?: string }): never =>
   redirect(`/dashboard?tab=${tab}&` + new URLSearchParams(msg as Record<string, string>).toString());
@@ -30,11 +31,15 @@ async function queueRun(trigger: "adhoc" | "schedule" | "rescore", url?: string)
 
 export async function runUrl(form: FormData) {
   const url = String(form.get("url") ?? "").trim();
+  let host = "";
   try {
-    if (!/^https?:$/.test(new URL(url).protocol)) throw 0;
+    const u = new URL(url);
+    if (!/^https?:$/.test(u.protocol)) throw 0;
+    host = u.hostname;
   } catch {
-    back("runs", { error: "Enter a full http(s) URL." });
+    back("apply", { error: "Enter a full http(s) URL." });
   }
+  if (LOGIN_WALLED.test(host)) back("apply", { error: LOGIN_WALLED_MSG }); // checked before a run (and quota) is used
   await queueRun("adhoc", url);
 }
 
@@ -55,6 +60,7 @@ export async function addCompany(form: FormData) {
   } catch {
     back("companies", { error: "Enter the company's careers page URL." });
   }
+  if (LOGIN_WALLED.test(new URL(url).hostname)) back("companies", { error: LOGIN_WALLED_MSG });
   const name = String(form.get("name") ?? "").trim() || d!.name;
   // `sources` is shared and server-written; reuse an existing row for the same careers URL.
   const db = adminClient();
